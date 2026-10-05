@@ -1,0 +1,146 @@
+.post-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.post-list__toolbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.post-list__toolbar h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.post-list__count {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.post-list__table {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.post-list__body {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-list__row {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr) 6.5rem 7rem;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.95rem 1.1rem;
+  border-top: 1px solid var(--line);
+}
+
+.post-list__row--head {
+  border-top: none;
+  background: var(--surface-soft);
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.post-list__body .post-list__row {
+  transition: background-color 160ms ease;
+}
+
+.post-list__body .post-list__row:hover {
+  background: var(--surface-hover);
+}
+
+.post-list__id,
+.post-list__author,
+.post-list__date {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.post-list__title {
+  color: var(--ink);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .post-list__row {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    grid-template-areas:
+      'id title'
+      'id meta';
+  }
+
+  .post-list__row--head {
+    display: none;
+  }
+
+  .post-list__id {
+    grid-area: id;
+  }
+
+  .post-list__title {
+    grid-area: title;
+    white-space: normal;
+  }
+
+  .post-list__author,
+  .post-list__date {
+    grid-area: meta;
+  }
+
+  .post-list__author {
+    justify-self: start;
+  }
+
+  .post-list__date {
+    justify-self: end;
+  }
+
+  .post-list__body .post-list__row {
+    position: relative;
+  }
+
+  .post-list__body .post-list__row::after {
+    content: '';
+    grid-area: meta;
+    display: block;
+  }
+
+  .post-list__author,
+  .post-list__date {
+    font-size: 0.85rem;
+  }
+
+  .post-list__body .post-list__row {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+    grid-template-areas:
+      'id title title'
+      'id author date';
+  }
+
+  .post-list__author {
+    grid-area: author;
+  }
+
+  .post-list__date {
+    grid-area: date;
+  }
+}
