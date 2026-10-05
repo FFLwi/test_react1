@@ -1,6 +1,6 @@
 import './PostList.css'
 
-function PostList({ posts }) {
+function PostList({ posts, selectedId, onSelectPost }) {
   return (
     <section className="post-list" aria-labelledby="post-list-title">
       <div className="post-list__toolbar">
@@ -17,22 +17,37 @@ function PostList({ posts }) {
         </div>
 
         <ul className="post-list__body">
-          {posts.map((post) => (
-            <li key={post.id} className="post-list__row" role="row">
-              <span className="post-list__id" role="cell">
-                {post.id}
-              </span>
-              <span className="post-list__title" role="cell">
-                {post.title}
-              </span>
-              <span className="post-list__author" role="cell">
-                {post.author}
-              </span>
-              <span className="post-list__date" role="cell">
-                {post.createdAt}
-              </span>
-            </li>
-          ))}
+          {posts.map((post) => {
+            const isSelected = post.id === selectedId
+
+            return (
+              <li key={post.id} role="row">
+                <button
+                  type="button"
+                  className={
+                    isSelected
+                      ? 'post-list__row post-list__row--selected'
+                      : 'post-list__row'
+                  }
+                  onClick={() => onSelectPost(post)}
+                  aria-pressed={isSelected}
+                >
+                  <span className="post-list__id" role="cell">
+                    {post.id}
+                  </span>
+                  <span className="post-list__title" role="cell">
+                    {post.title}
+                  </span>
+                  <span className="post-list__author" role="cell">
+                    {post.author}
+                  </span>
+                  <span className="post-list__date" role="cell">
+                    {post.createdAt}
+                  </span>
+                </button>
+              </li>
+            )
+          })}
         </ul>
       </div>
     </section>
